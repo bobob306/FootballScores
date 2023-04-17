@@ -1,0 +1,29 @@
+buildscript {
+    ext {
+        compose_version = '1.4.1'
+        navigation_version = '2.5.3'
+        room_version = '2.5.1'
+        retrofit_version = '2.9.0'
+        hilt_android_version = '2.44'
+        hilt_compiler_version = '1.0.0'
+        coroutines_version = '1.6.4'
+        android_lifecycle_version = '2.6.1'
+        glide_version = '4.15.1'
+        coil_version = '2.3.0'
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        classpath 'com.google.gms:google-services:4.3.15'
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_android_version"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
