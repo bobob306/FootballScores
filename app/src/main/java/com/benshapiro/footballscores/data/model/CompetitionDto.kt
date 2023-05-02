@@ -1,7 +1,5 @@
 package com.benshapiro.footballscores.data.model
 
-import com.google.gson.annotations.SerializedName
-
 data class CompetitionDto(
     val id : Int,
     val area: AreaDto,
@@ -128,7 +126,7 @@ data class MatchScoreDto(
 )
 
 data class ScoreDto(
-    val homeGoals : Int? = 0,
+    val homeGoals: Int? = 0,
     val awayGoals: Int? = 0,
 )
 

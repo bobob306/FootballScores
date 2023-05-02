@@ -10,6 +10,10 @@ plugins {
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.dagger.hilt.android'
 
+def propertiesFile = rootProject.file("local.properties")
+def properties = new Properties()
+properties.load(new FileInputStream(propertiesFile))
+
 android {
     namespace 'com.benshapiro.footballscores'
     compileSdk 33
@@ -20,6 +24,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+        buildConfigField("String", "API_KEY_VALUE", properties["API_KEY_VALUE"])
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -60,10 +65,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.fragment:fragment-ktx:1.5.6'
+    implementation 'androidx.fragment:fragment-ktx:1.5.7'
     implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.1"
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.21'
-    implementation 'androidx.activity:activity-compose:1.7.0'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.8.10'
+    implementation 'androidx.activity:activity-compose:1.7.1'
 
     // Android Lifecycle
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$android_lifecycle_version"
@@ -92,8 +97,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$navigation_version")
     implementation("androidx.navigation:navigation-ui-ktx:$navigation_version")
     implementation "androidx.navigation:navigation-compose:$navigation_version"
-    implementation 'com.google.firebase:firebase-auth-ktx:21.2.0'
-    implementation 'androidx.core:core-ktx:+'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.3.0'
+    implementation 'androidx.core:core-ktx:1.10.0'
 
     // Room
     kapt "androidx.room:room-compiler:$room_version"

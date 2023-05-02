@@ -11,14 +11,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.benshapiro.footballscores.R
-import com.benshapiro.footballscores.data.viewData.ScoreViewData
+import com.benshapiro.footballscores.data.viewData.ScoreCardViewData
 import com.benshapiro.footballscores.ui.theme.FootballScoresTheme
 import com.benshapiro.footballscores.ui.theme.White
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ScoreCard(
-    scoreViewData: ScoreViewData
+    scorecardViewData: ScoreCardViewData
 ) {
     Card(
         shape = RoundedCornerShape(4.dp),
@@ -42,11 +42,13 @@ fun ScoreCard(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = "home team icon"
             )
-            ScoreText(text = scoreViewData.homeTeamName)
-            ScoreText(text = scoreViewData.homeTeamScore.toString())
-            ScoreText(text = ":")
-            ScoreText(text = scoreViewData.awayTeamScore.toString())
-            ScoreText(text = scoreViewData.awayTeamName)
+            scorecardViewData.apply {
+                ScoreTextName(text = homeTeamShortName)
+                ScoreText(text = homeTeamScore.toString())
+                ScoreText(text = ":")
+                ScoreText(text = awayTeamScore.toString())
+                ScoreTextName(text = awayTeamShortName)
+            }
             Image(
                 modifier = Modifier
                     .padding(horizontal = 4.dp)
@@ -59,19 +61,38 @@ fun ScoreCard(
 }
 
 @Composable
-fun ScoreText(text: String){
+fun ScoreTextName(text: String) {
     Text(
-        modifier = Modifier.
-        padding(horizontal = 4.dp),
-        text = text)
+        modifier = Modifier
+            .fillMaxWidth(0.2f)
+            .padding(horizontal = 4.dp),
+        text = text
+    )
+}
+
+@Composable
+fun ScoreText(text: String) {
+    Text(
+        modifier = Modifier
+            .padding(horizontal = 4.dp),
+        text = text
+    )
 }
 
 @Preview
 @Composable
 private fun PreviewScoreItem(
-    previewScoreModel: ScoreViewData = ScoreViewData("MasjhdklkasldaU", "AFC", 0, 1)
+    previewScoreCardViewData: ScoreCardViewData = ScoreCardViewData(
+        null,
+        null,
+        "MUFC",
+        "AVFC",
+        2,
+        0,
+        42
+    )
 ) {
     FootballScoresTheme() {
-        ScoreCard(scoreViewData = previewScoreModel)
+        ScoreCard(scorecardViewData = previewScoreCardViewData)
     }
 }
